@@ -1,4 +1,5 @@
-﻿using Library.Repository.Context;
+﻿using Library.Api.ExceptionsHandler;
+using Library.Repository.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -35,8 +36,9 @@ namespace Library.Api
             {
                 app.UseHsts();
             }
-            
+
             app.UseHttpsRedirection();
+            app.UseMiddleware(typeof(ExceptionHandler));
             app.UseMvc();
 
             context.Database.Migrate();
