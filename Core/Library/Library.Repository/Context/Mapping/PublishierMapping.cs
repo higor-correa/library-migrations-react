@@ -20,6 +20,10 @@ namespace Library.Repository.Context.Mapping
 
             builder.HasKey(x => x.Id);
 
+            builder.HasMany(x => x.Authors)
+                .WithOne(x => x.Publishier)
+                .HasForeignKey(x => x.PublishierId);
+
             builder.HasMany(x => x.PublishedBooks)
                 .WithOne(x => x.Publishier)
                 .HasForeignKey(x => x.PublishierId);

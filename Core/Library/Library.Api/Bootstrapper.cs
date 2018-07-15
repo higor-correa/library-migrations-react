@@ -24,6 +24,7 @@ namespace Library.Api
                     _configuration.GetValue<string>("Db"))));
 
             _services.AddLibrary();
+            _services.AddAutoMapper();
         }
     }
 }
