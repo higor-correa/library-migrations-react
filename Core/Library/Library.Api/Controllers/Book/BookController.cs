@@ -1,5 +1,4 @@
 ﻿using Library.Domain.Entities;
-using Library.Repository.Context;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -9,11 +8,8 @@ namespace Library.Api.Controllers.Book
     [ApiController]
     public class BookController : ControllerBase
     {
-        private LibraryContext _context;
-
-        public BookController(LibraryContext context)
+        public BookController()
         {
-            _context = context;
         }
 
         [HttpGet]
