@@ -1,6 +1,7 @@
 ﻿using Library.Domain.Entities;
 using Library.Repository.Context;
 using Library.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
@@ -35,9 +36,19 @@ namespace Library.Repository
             return _dbContext.Set<TEntity>().ToList();
         }
 
+        public IList<TEntity> GetAllAsNoTracking()
+        {
+            return _dbContext.Set<TEntity>().AsNoTracking().ToList();
+        }
+
         public TEntity Get(Guid id)
         {
             return _dbContext.Set<TEntity>().SingleOrDefault(e => e.Id == id);
+        }
+
+        public TEntity GetAsNoTracking(Guid id)
+        {
+            return _dbContext.Set<TEntity>().AsNoTracking().SingleOrDefault(e => e.Id == id);
         }
 
         public void Delete(TEntity entity)
