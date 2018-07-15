@@ -12,7 +12,6 @@ namespace Library.Repository
         where TEntity : BaseEntity
     {
         protected readonly LibraryContext _dbContext;
-        private IQueryable<TEntity> _where;
 
         public BaseCrudRepository(LibraryContext dbContext)
         {
