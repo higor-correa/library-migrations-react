@@ -1,4 +1,5 @@
-﻿using Library.Repository.Context;
+﻿using Library.Api.Extensions;
+using Library.Repository.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +22,8 @@ namespace Library.Api
             _services.AddDbContext<LibraryContext>(opt => opt.UseNpgsql(
                 _configuration.GetConnectionString(
                     _configuration.GetValue<string>("Db"))));
+
+            _services.AddLibrary();
         }
     }
 }
