@@ -1,20 +1,20 @@
 ﻿using Library.Domain.Entities;
 using Library.Repository.Context;
 using Library.Repository.Interfaces;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace Library.Repository
 {
-    public abstract class BaseRepository<TEntity> : ICrudRepository<TEntity>
+    public abstract class BaseCrudRepository<TEntity> : ICrudRepository<TEntity>
         where TEntity : BaseEntity
     {
         protected readonly LibraryContext _dbContext;
+        private IQueryable<TEntity> _where;
 
-        public BaseRepository(LibraryContext dbContext)
+        public BaseCrudRepository(LibraryContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -38,13 +38,20 @@ namespace Library.Repository
 
         public TEntity Get(Guid id)
         {
-            return _dbContext.Set<TEntity>().SingleOrDefault(l => l.Id == id);
+            return _dbContext.Set<TEntity>().SingleOrDefault(e => e.Id == id);
         }
 
         public void Delete(TEntity entity)
         {
             _dbContext.Set<TEntity>().Remove(entity);
             _dbContext.SaveChanges();
+        }
+
+        public IList<PropertyEntry> GetChanges(TEntity entity)
+        {
+            return _dbContext.Entry(entity).Properties
+                .Where(e => e.IsModified)
+                .ToList();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Library.Domain.Entities;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 
@@ -11,5 +12,6 @@ namespace Library.Repository.Interfaces
         void Insert(TEntity entity);
         void Update(TEntity entity);
         void Delete(TEntity entity);
+        IList<PropertyEntry> GetChanges(TEntity entity);
     }
 }
