@@ -21,6 +21,9 @@ namespace Library.Repository
 
         public void Update(TEntity entity)
         {
+            if (_dbContext.Entry(entity).State == EntityState.Detached)
+                _dbContext.Attach(entity);
+
             _dbContext.Set<TEntity>().Update(entity);
             _dbContext.SaveChanges();
         }
