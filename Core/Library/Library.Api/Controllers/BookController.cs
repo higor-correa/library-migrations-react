@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
-namespace Library.Api.Controllers.Book
+namespace Library.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
