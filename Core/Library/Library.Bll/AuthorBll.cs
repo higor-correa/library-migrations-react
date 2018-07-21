@@ -41,10 +41,9 @@ namespace Library.Bll
 
         public void Update(Guid id, AuthorRequestDTO request)
         {
-            var entity = _repository.GetAsNoTracking(id) ?? throw new EntityNotFoundException();
+            var entity = _repository.Get(id) ?? throw new EntityNotFoundException();
 
-            entity = Mapper.Map<AuthorEntity>(request);
-            entity.Id = id;
+            Mapper.Map(request, entity);
 
             _repository.Update(entity);
         }
