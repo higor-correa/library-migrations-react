@@ -7,12 +7,12 @@ using System.Linq;
 
 namespace Library.Domain.AutoMapperProfiles
 {
-    public class DomainProfile : Profile
+    public class AuthorProfile : Profile
     {
-        public DomainProfile()
+        public void CreateMaps()
         {
             CreateMap<AuthorRequestDTO, AuthorEntity>().ForMember(x => x.Id, opt => opt.Ignore());
-            CreateMap<AuthorEntity, AuthorResponseDTO>().ForMember(x => x.Books, 
+            CreateMap<AuthorEntity, AuthorResponseDTO>().ForMember(x => x.Books,
                 opt => opt.MapFrom(x => Mapper.Map<List<BookResponseDTO>>(x.BooksAuthor.Select(b => b.Book))));
         }
     }

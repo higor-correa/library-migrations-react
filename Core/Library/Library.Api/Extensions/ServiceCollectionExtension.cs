@@ -20,7 +20,8 @@ namespace Library.Api.Extensions
         {
             Mapper.Initialize(cfg =>
             {
-                cfg.AddProfile<DomainProfile>();
+                cfg.AddProfile<AuthorProfile>();
+                cfg.AddProfile<BookProfile>();
             });
         }
     }

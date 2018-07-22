@@ -1,6 +1,8 @@
 ﻿using Library.Bll.Exceptions;
+using Library.Domain.DTO;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Net;
 using System.Threading.Tasks;
@@ -37,11 +39,17 @@ namespace Library.Api.ExceptionsHandler
             else if (exception is BusinessException) code = HttpStatusCode.BadRequest;
 
             if (code == HttpStatusCode.InternalServerError)
-                message = new { message = "Ocorreu um erro interno do servidor, contate o suporte ou tente novamente mais tarde.", realException = exception.Message };
+                message = new ErrorDTO { Message = "Internal server error, contact support or try again later.", RealException = exception.Message };
             else
-                message = new { message = exception.Message };
+                message = new ErrorDTO { Message = exception.Message };
 
-            var result = JsonConvert.SerializeObject((object)message);
+            var result = JsonConvert.SerializeObject((object)message,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                    NullValueHandling = NullValueHandling.Ignore
+                });
+
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)code;
             return context.Response.WriteAsync(result);
