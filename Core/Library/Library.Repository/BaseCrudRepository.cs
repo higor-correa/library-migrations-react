@@ -3,6 +3,7 @@ using Library.Repository.Context;
 using Library.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,18 @@ namespace Library.Repository
             _dbContext.SaveChanges();
         }
 
+        protected virtual IQueryable<TEntity> Include(IQueryable<TEntity> query)
+        {
+            return query;
+        }
+
+        public IList<TEntity> GetAll(bool includeChildren)
+        {
+            return includeChildren
+               ? Include(_dbContext.Set<TEntity>().AsQueryable()).ToList()
+               : GetAll();
+        }
+
         public IList<TEntity> GetAll()
         {
             return _dbContext.Set<TEntity>().ToList();
@@ -42,6 +55,13 @@ namespace Library.Repository
         public IList<TEntity> GetAllAsNoTracking()
         {
             return _dbContext.Set<TEntity>().AsNoTracking().ToList();
+        }
+
+        public TEntity Get(Guid id, bool includeChildren)
+        {
+            return includeChildren
+                ? Include(_dbContext.Set<TEntity>().AsQueryable()).SingleOrDefault(e => e.Id == id)
+                : Get(id);
         }
 
         public TEntity Get(Guid id)

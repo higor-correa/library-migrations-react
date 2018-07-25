@@ -18,7 +18,7 @@ namespace Library.Bll
 
         public BookResponseDTO Get(Guid id)
         {
-            var entity = _repository.Get(id) ?? throw new EntityNotFoundException();
+            var entity = _repository.Get(id, true) ?? throw new EntityNotFoundException();
 
             var response = Mapper.Map<BookResponseDTO>(entity);
 
@@ -27,7 +27,7 @@ namespace Library.Bll
 
         public IList<BookResponseDTO> GetAll()
         {
-            return Mapper.Map<List<BookResponseDTO>>(_repository.GetAll());
+            return Mapper.Map<List<BookResponseDTO>>(_repository.GetAll(true));
         }
 
         public Guid Insert(BookRequestDTO request)

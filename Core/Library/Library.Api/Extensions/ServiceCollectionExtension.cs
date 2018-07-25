@@ -24,6 +24,7 @@ namespace Library.Api.Extensions
             {
                 cfg.AddProfile<AuthorProfile>();
                 cfg.AddProfile<BookProfile>();
+                cfg.AddProfile<BookCategoryProfile>();
             });
         }
     }
