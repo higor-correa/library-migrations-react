@@ -16,7 +16,7 @@ namespace Library.Repository.Context.Mapping
 
             builder.Property(x => x.Id).HasDefaultValue(Guid.NewGuid());
             builder.Property(x => x.Name).IsRequired().HasMaxLength(120);
-            builder.Property(x => x.PublishierId).IsRequired();
+            builder.Property(x => x.PublishierId);
             builder.Property(x => x.Code).HasMaxLength(10);
 
             builder.HasKey(x => x.Id);

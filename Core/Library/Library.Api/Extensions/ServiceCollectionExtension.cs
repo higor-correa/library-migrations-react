@@ -14,6 +14,8 @@ namespace Library.Api.Extensions
         {
             service.AddScoped<IAuthorBll, AuthorBll>();
             service.AddScoped<IAuthorRepository, AuthorRepository>();
+            service.AddScoped<IBookBll, BookBll>();
+            service.AddScoped<IBookRepository, BookRepository>();
         }
 
         public static void AddAutoMapper(this IServiceCollection service)

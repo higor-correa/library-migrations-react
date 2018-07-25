@@ -9,7 +9,7 @@ namespace Library.Domain.AutoMapperProfiles
 {
     public class AuthorProfile : Profile
     {
-        public void CreateMaps()
+        public AuthorProfile()
         {
             CreateMap<AuthorRequestDTO, AuthorEntity>().ForMember(x => x.Id, opt => opt.Ignore());
             CreateMap<AuthorEntity, AuthorResponseDTO>().ForMember(x => x.Books,

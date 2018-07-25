@@ -1,6 +1,6 @@
 ﻿using FluentValidation.AspNetCore;
 using Library.Api.ExceptionsHandler;
-using Library.Domain.Entities;
+using Library.Bll.Validators.DTO.Author;
 using Library.Repository.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,7 +32,7 @@ namespace Library.Api
                     opt.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                     opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 })
-                .AddFluentValidation(opt => opt.RegisterValidatorsFromAssemblyContaining<BookEntity>());
+                .AddFluentValidation(opt => opt.RegisterValidatorsFromAssemblyContaining<AuthorRequestDTOValidator>());
 
             new Bootstrapper(services, Configuration).Register();
         }

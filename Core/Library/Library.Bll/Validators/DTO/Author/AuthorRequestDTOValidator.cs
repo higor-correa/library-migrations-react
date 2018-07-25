@@ -1,8 +1,9 @@
 ﻿using FluentValidation;
 using FluentValidation.Validators;
+using Library.Domain.DTO.Author;
 using System.Text.RegularExpressions;
 
-namespace Library.Domain.DTO.Author.Validator
+namespace Library.Bll.Validators.DTO.Author
 {
     public class AuthorRequestDTOValidator : AbstractValidator<AuthorRequestDTO>
     {
