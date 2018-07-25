@@ -5,9 +5,11 @@ VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Repository", "Library.Repository\Library.Repository.csproj", "{0B9BCB3B-0D8A-4181-BF47-F0D8E96B67AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Domain", "Library.Domain\Library.Domain.csproj", "{AA31515D-9A18-4CCD-9923-4F437EED4851}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Domain", "Library.Domain\Library.Domain.csproj", "{AA31515D-9A18-4CCD-9923-4F437EED4851}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Api", "Library.Api\Library.Api.csproj", "{9854BF45-AC68-4999-9F1D-3F1ABBE20E8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Api", "Library.Api\Library.Api.csproj", "{9854BF45-AC68-4999-9F1D-3F1ABBE20E8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Bll", "Library.Bll\Library.Bll.csproj", "{831B737C-010A-4E52-A779-6316595CD41E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{9854BF45-AC68-4999-9F1D-3F1ABBE20E8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9854BF45-AC68-4999-9F1D-3F1ABBE20E8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9854BF45-AC68-4999-9F1D-3F1ABBE20E8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{831B737C-010A-4E52-A779-6316595CD41E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{831B737C-010A-4E52-A779-6316595CD41E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{831B737C-010A-4E52-A779-6316595CD41E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{831B737C-010A-4E52-A779-6316595CD41E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

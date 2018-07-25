@@ -5,10 +5,10 @@ namespace Library.Domain.Enums
     public enum BookCategoryEnum : int
     {
         [Display(Name = "BookCategoryAction")]
-        Action = 1,
+        Action,
         [Display(Name = "BookCategoryFiction")]
-        Fiction = 2,
+        Fiction,
         [Display(Name = "BookCategorySyfy")]
-        Syfy = 3
+        Syfy
     }
 }

@@ -1,10 +1,15 @@
-﻿using Library.Repository.Context;
+﻿using FluentValidation.AspNetCore;
+using Library.Api.ExceptionsHandler;
+using Library.Bll.Validators.DTO.Author;
+using Library.Repository.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Library.Api
 {
@@ -20,7 +25,15 @@ namespace Library.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddJsonOptions(opt =>
+                {
+                    opt.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                    opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                })
+                .AddFluentValidation(opt => opt.RegisterValidatorsFromAssemblyContaining<AuthorRequestDTOValidator>());
+
             new Bootstrapper(services, Configuration).Register();
         }
 
@@ -35,8 +48,9 @@ namespace Library.Api
             {
                 app.UseHsts();
             }
-            
+
             app.UseHttpsRedirection();
+            app.UseMiddleware(typeof(ExceptionHandler));
             app.UseMvc();
 
             context.Database.Migrate();
