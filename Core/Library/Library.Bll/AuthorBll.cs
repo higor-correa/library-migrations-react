@@ -2,10 +2,12 @@
 using Library.Bll.Exceptions;
 using Library.Bll.Interfaces;
 using Library.Domain.DTO.Author;
+using Library.Domain.DTO.Book;
 using Library.Domain.Entities;
 using Library.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Library.Bll
 {
@@ -22,12 +24,25 @@ namespace Library.Bll
 
             var response = Mapper.Map<AuthorResponseDTO>(entity);
 
+            response.Books = Mapper.Map<List<BookResponseDTO>>(entity.BooksAuthor.Select(x => x.Book));
+
             return response;
         }
 
         public IList<AuthorResponseDTO> GetAll()
         {
-            return Mapper.Map<List<AuthorResponseDTO>>(_repository.GetAll(true));
+            var entities = _repository.GetAll(true);
+
+            var response = Mapper.Map<List<AuthorResponseDTO>>(entities);
+
+            foreach (var author in response)
+            {
+                author.Books = Mapper.Map<List<BookResponseDTO>>(
+                    entities.FirstOrDefault(x => x.Id == author.Id)?.
+                        BooksAuthor.Select(x => x.Book));
+            }
+
+            return response;
         }
 
         public Guid Insert(AuthorRequestDTO request)
