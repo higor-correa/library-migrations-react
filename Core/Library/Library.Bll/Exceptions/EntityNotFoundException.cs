@@ -4,8 +4,8 @@ namespace Library.Bll.Exceptions
 {
     public class EntityNotFoundException : Exception
     {
-        private static readonly string MESSAGE = "Não foi possível encontrar o recurso solicitado!";
-        private static readonly string MESSAGE_RESOURCE = "Não foi possível encontrar o recurso {0} solicitado!";
+        private static readonly string MESSAGE = "Wasn't possible find requested resource";
+        private static readonly string MESSAGE_RESOURCE = "Wasn't possible find requested resource! - {0}";
 
         public EntityNotFoundException() : base(MESSAGE) { }
 

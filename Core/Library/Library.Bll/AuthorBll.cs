@@ -20,7 +20,7 @@ namespace Library.Bll
 
         public AuthorResponseDTO Get(Guid id)
         {
-            var entity = _repository.Get(id, true) ?? throw new EntityNotFoundException();
+            var entity = _repository.Get(id, true) ?? throw new EntityNotFoundException($"Author ({id})");
 
             var response = Mapper.Map<AuthorResponseDTO>(entity);
 
@@ -56,7 +56,7 @@ namespace Library.Bll
 
         public void Update(Guid id, AuthorRequestDTO request)
         {
-            var entity = _repository.Get(id) ?? throw new EntityNotFoundException();
+            var entity = _repository.Get(id) ?? throw new EntityNotFoundException($"Author ({id})");
 
             Mapper.Map(request, entity);
 
@@ -65,7 +65,7 @@ namespace Library.Bll
 
         public void Delete(Guid id)
         {
-            var entity = _repository.Get(id) ?? throw new EntityNotFoundException();
+            var entity = _repository.Get(id) ?? throw new EntityNotFoundException($"Author ({id})");
 
             _repository.Delete(entity);
         }
