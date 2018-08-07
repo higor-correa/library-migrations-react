@@ -54,5 +54,13 @@ namespace Library.Api.Controllers
 
             return NoContent();
         }
+
+        [HttpPost("{id}/publish")]
+        public IActionResult PublishBook([FromRoute] Guid? id, [FromBody] PublishBookRequestDTO request)
+        {
+            _bookBll.PublishBook(id, request);
+
+            return NoContent();
+        }
     }
 }
