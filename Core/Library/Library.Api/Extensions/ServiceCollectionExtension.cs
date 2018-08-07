@@ -14,8 +14,12 @@ namespace Library.Api.Extensions
         {
             service.AddScoped<IAuthorBll, AuthorBll>();
             service.AddScoped<IAuthorRepository, AuthorRepository>();
+
             service.AddScoped<IBookBll, BookBll>();
             service.AddScoped<IBookRepository, BookRepository>();
+
+            service.AddScoped<IPublishierBll, PublishierBll>();
+            service.AddScoped<IPublishierRepository, PublishierRepository>();
         }
 
         public static void AddAutoMapper(this IServiceCollection service)
@@ -25,6 +29,7 @@ namespace Library.Api.Extensions
                 cfg.AddProfile<AuthorProfile>();
                 cfg.AddProfile<BookProfile>();
                 cfg.AddProfile<BookCategoryProfile>();
+                cfg.AddProfile<PublishierProfile>();
             });
         }
     }
