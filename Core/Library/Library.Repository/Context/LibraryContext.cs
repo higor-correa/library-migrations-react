@@ -1,7 +1,6 @@
 ﻿using Library.Domain.Entities;
 using Library.Repository.Context.Mapping;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 
 namespace Library.Repository.Context
 {
@@ -9,19 +8,16 @@ namespace Library.Repository.Context
     {
 
         public LibraryContext(DbContextOptions options) : base(options)
-        {           
+        {
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var mappings = new List<BaseMapping>
-            {
-                new AuthorMapping(modelBuilder),
-                new PublishierMapping(modelBuilder),
-                new BookMapping(modelBuilder),
-                new AuthorBookMapping(modelBuilder),
-                new BookCategoryMapping(modelBuilder)
-            };
+            new AuthorMapping(modelBuilder);
+            new PublishierMapping(modelBuilder);
+            new BookMapping(modelBuilder);
+            new AuthorBookMapping(modelBuilder);
+            new BookCategoryMapping(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
         }

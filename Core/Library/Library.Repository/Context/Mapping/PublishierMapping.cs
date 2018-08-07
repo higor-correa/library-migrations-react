@@ -1,10 +1,9 @@
 ﻿using Library.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace Library.Repository.Context.Mapping
 {
-    public class PublishierMapping : BaseMapping
+    public class PublishierMapping : BaseMapping<PublishierEntity>
     {
         public PublishierMapping(ModelBuilder modelBuilder) : base(modelBuilder)
         {
@@ -12,19 +11,14 @@ namespace Library.Repository.Context.Mapping
 
         public override void Map()
         {
-            var builder = _modelBuilder.Entity<PublishierEntity>();
+            _builder.Property(x => x.Name).IsRequired().HasMaxLength(60);
+            _builder.Property(x => x.Code).HasMaxLength(10);
 
-            builder.Property(x => x.Id).HasDefaultValue(Guid.NewGuid());
-            builder.Property(x => x.Name).IsRequired().HasMaxLength(60);
-            builder.Property(x => x.Code).HasMaxLength(10);
-
-            builder.HasKey(x => x.Id);
-
-            builder.HasMany(x => x.Authors)
+            _builder.HasMany(x => x.Authors)
                 .WithOne(x => x.Publishier)
                 .HasForeignKey(x => x.PublishierId);
 
-            builder.HasMany(x => x.PublishedBooks)
+            _builder.HasMany(x => x.PublishedBooks)
                 .WithOne(x => x.Publishier)
                 .HasForeignKey(x => x.PublishierId);
         }

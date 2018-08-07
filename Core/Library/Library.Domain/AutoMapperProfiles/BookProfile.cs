@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Library.Domain.DTO.Author;
 using Library.Domain.DTO.Book;
 using Library.Domain.DTO.BookCategory;
 using Library.Domain.Entities;
@@ -20,8 +19,7 @@ namespace Library.Domain.AutoMapperProfiles
                       opt.MapFrom(m => m.Authors.Select(x => new AuthorBookEntity { AuthorId = x })));
 
             CreateMap<BookEntity, BookResponseDTO>()
-                .ForMember(x => x.Authors, opt =>
-                    opt.MapFrom(x => Mapper.Map<List<AuthorResponseDTO>>(x.AuthorsBook.Select(a => a.Author))))
+                .ForMember(x => x.Authors, opt => opt.Ignore())
                 .ForMember(x => x.Categories, opt =>
                     opt.MapFrom(m => Mapper.Map<List<BookCategoryResponseDTO>>(m.BookCategories)));
         }

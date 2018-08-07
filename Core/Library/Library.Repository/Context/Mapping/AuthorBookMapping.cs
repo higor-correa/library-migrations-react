@@ -1,10 +1,9 @@
 ﻿using Library.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace Library.Repository.Context.Mapping
 {
-    public class AuthorBookMapping : BaseMapping
+    public class AuthorBookMapping : BaseMapping<AuthorBookEntity>
     {
         public AuthorBookMapping(ModelBuilder modelBuilder) : base(modelBuilder)
         {
@@ -12,24 +11,21 @@ namespace Library.Repository.Context.Mapping
 
         public override void Map()
         {
-            var builder = _modelBuilder.Entity<AuthorBookEntity>();
-            
-            builder.HasKey(x => new { x.AuthorId, x.BookId });
+            _builder.HasKey(x => new { x.AuthorId, x.BookId });
 
-            builder.Property(x => x.Id).HasDefaultValue(Guid.NewGuid());
-            builder.Property(x => x.AuthorId).IsRequired();
-            builder.Property(x => x.BookId).IsRequired();
+            _builder.Property(x => x.AuthorId).IsRequired();
+            _builder.Property(x => x.BookId).IsRequired();
 
-            builder.HasOne(x => x.Author)
+            _builder.HasOne(x => x.Author)
                 .WithMany(x => x.BooksAuthor)
                 .HasForeignKey(x => x.AuthorId);
 
-            builder.HasOne(x => x.Book)
+            _builder.HasOne(x => x.Book)
                 .WithMany(x => x.AuthorsBook)
                 .HasForeignKey(x => x.BookId);
 
-            builder.HasIndex(x => x.BookId);
-            builder.HasIndex(x => x.AuthorId);
+            _builder.HasIndex(x => x.BookId);
+            _builder.HasIndex(x => x.AuthorId);
         }
     }
 }

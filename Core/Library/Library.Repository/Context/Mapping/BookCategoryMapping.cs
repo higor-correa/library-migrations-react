@@ -1,10 +1,9 @@
 ﻿using Library.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace Library.Repository.Context.Mapping
 {
-    public class BookCategoryMapping : BaseMapping
+    public class BookCategoryMapping : BaseMapping<BookCategoryEntity>
     {
         public BookCategoryMapping(ModelBuilder modelBuilder) : base(modelBuilder)
         {
@@ -12,19 +11,16 @@ namespace Library.Repository.Context.Mapping
 
         public override void Map()
         {
-            var builder = _modelBuilder.Entity<BookCategoryEntity>();
+            _builder.HasKey(x => new { x.BookId, x.Category });
 
-            builder.Property(x => x.Id).HasDefaultValue(Guid.NewGuid());
-            builder.Property(x => x.Category).IsRequired();
-            builder.Property(x => x.BookId).IsRequired();
+            _builder.Property(x => x.Category).IsRequired();
+            _builder.Property(x => x.BookId).IsRequired();
 
-            builder.HasKey(x => new { x.BookId, x.Category });
-
-            builder.HasOne(x => x.Book)
+            _builder.HasOne(x => x.Book)
                 .WithMany(x => x.BookCategories)
                 .HasForeignKey(x => x.BookId);
 
-            builder.HasIndex(x => new { x.BookId, x.Category }).IsUnique();
+            _builder.HasIndex(x => new { x.BookId, x.Category }).IsUnique();
         }
     }
 }
