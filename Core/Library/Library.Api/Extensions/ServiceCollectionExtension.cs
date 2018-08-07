@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
 using Library.Bll;
+using Library.Bll.Book;
+using Library.Bll.Book.Validators;
+using Library.Bll.Book.Validators.Interface;
 using Library.Bll.Interfaces;
 using Library.Domain.AutoMapperProfiles;
 using Library.Repository;
@@ -15,6 +18,7 @@ namespace Library.Api.Extensions
             service.AddScoped<IAuthorBll, AuthorBll>();
             service.AddScoped<IAuthorRepository, AuthorRepository>();
 
+            service.AddScoped<IBookPublishValidator, BookPublishValidator>();
             service.AddScoped<IBookBll, BookBll>();
             service.AddScoped<IBookRepository, BookRepository>();
 
