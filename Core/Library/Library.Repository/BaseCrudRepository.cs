@@ -3,7 +3,6 @@ using Library.Repository.Context;
 using Library.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -85,6 +84,11 @@ namespace Library.Repository
             return _dbContext.Entry(entity).Properties
                 .Where(e => e.IsModified)
                 .ToList();
+        }
+
+        public IQueryable<TEntity> GetQuery()
+        {
+            return _dbContext.Set<TEntity>();
         }
     }
 }
