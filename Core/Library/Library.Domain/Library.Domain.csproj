@@ -9,4 +9,19 @@
     <PackageReference Include="FluentValidation.AspNetCore" Version="7.6.104" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="EnumDescriptionResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EnumDescriptionResource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="EnumDescriptionResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EnumDescriptionResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>
