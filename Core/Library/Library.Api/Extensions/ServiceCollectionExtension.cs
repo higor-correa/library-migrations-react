@@ -22,6 +22,8 @@ namespace Library.Api.Extensions
             service.AddScoped<IBookBll, BookBll>();
             service.AddScoped<IBookRepository, BookRepository>();
 
+            service.AddScoped<IBookCategoryEnumBll, BookCategoryEnumBll>();
+
             service.AddScoped<IPublishierBll, PublishierBll>();
             service.AddScoped<IPublishierRepository, PublishierRepository>();
         }
