@@ -79,8 +79,13 @@ namespace Library.Bll.Book
 
         public void PublishBook(Guid? id, PublishBookRequestDTO publishBookRequest)
         {
-            _bookPublishValidator.ValidatePublish(id, publishBookRequest);
-            var book = _repository.Get(id.Value);
+            var book = _repository.Get(id.GetValueOrDefault())
+                ?? throw new EntityNotFoundException($"Book ({id})");
+
+            var publisher = _publishierRepository.Get(publishBookRequest.PublishierId.GetValueOrDefault())
+                ?? throw new EntityNotFoundException($"Publishier ({publishBookRequest.PublishierId})");
+
+            _bookPublishValidator.ValidatePublish(book, publisher);
 
             book.Publishier = _publishierRepository.Get(publishBookRequest.PublishierId.Value);
 
