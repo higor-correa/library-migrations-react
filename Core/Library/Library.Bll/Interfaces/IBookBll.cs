@@ -11,5 +11,6 @@ namespace Library.Bll.Interfaces
         Guid Insert(BookRequestDTO request);
         void Update(Guid id, BookRequestDTO request);
         void Delete(Guid id);
+        void PublishBook(Guid? id, PublishBookRequestDTO publishBookRequest);
     }
 }

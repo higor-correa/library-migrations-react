@@ -1,13 +1,11 @@
 ﻿using AutoMapper;
 using Library.Bll.Exceptions;
 using Library.Bll.Interfaces;
-using Library.Domain.DTO.Book;
 using Library.Domain.DTO.Publishier;
 using Library.Domain.Entities;
 using Library.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Library.Bll
 {
@@ -20,7 +18,7 @@ namespace Library.Bll
 
         public PublishierResponseDTO Get(Guid id)
         {
-            var entity = _repository.Get(id, true) ?? throw new EntityNotFoundException();
+            var entity = _repository.Get(id, true) ?? throw new EntityNotFoundException($"Publishier ({id})");
 
             var response = Mapper.Map<PublishierResponseDTO>(entity);
 
@@ -47,7 +45,7 @@ namespace Library.Bll
 
         public void Update(Guid id, PublishierRequestDTO request)
         {
-            var entity = _repository.Get(id) ?? throw new EntityNotFoundException();
+            var entity = _repository.Get(id) ?? throw new EntityNotFoundException($"Publishier ({id})");
 
             Mapper.Map(request, entity);
 
@@ -56,7 +54,7 @@ namespace Library.Bll
 
         public void Delete(Guid id)
         {
-            var entity = _repository.Get(id) ?? throw new EntityNotFoundException();
+            var entity = _repository.Get(id) ?? throw new EntityNotFoundException($"Publishier ({id})");
 
             _repository.Delete(entity);
         }
