@@ -1,10 +1,9 @@
-﻿using Library.Domain.DTO.Book;
-using System;
+﻿using Library.Domain.Entities;
 
 namespace Library.Bll.Book.Validators.Interface
 {
     public interface IBookPublishValidator
     {
-        void ValidatePublish(Guid? id, PublishBookRequestDTO publishBookRequest);
+        void ValidatePublish(BookEntity book, PublishierEntity publisher);
     }
 }
