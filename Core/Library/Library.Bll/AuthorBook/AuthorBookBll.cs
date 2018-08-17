@@ -1,7 +1,7 @@
-﻿using Library.Bll.Interfaces;
+﻿using Library.Bll.AuthorBook.Interfaces;
 using Library.Repository.Interfaces;
 
-namespace Library.Bll
+namespace Library.Bll.AuthorBook
 {
     public class AuthorBookBll : IAuthorBookBll
     {

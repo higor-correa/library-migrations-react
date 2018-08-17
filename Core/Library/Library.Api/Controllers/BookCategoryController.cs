@@ -1,4 +1,4 @@
-﻿using Library.Bll.Interfaces;
+﻿using Library.Bll.BookCategory.Types.Interface;
 using Library.Domain.DTO.BookCategory;
 using Library.Domain.Enums;
 using Microsoft.AspNetCore.Mvc;
@@ -9,14 +9,14 @@ namespace Library.Api.Controllers
     [ApiController]
     public class BookCategoryController : ControllerBase
     {
-        private readonly IBookCategoryEnumBll _bookCategoryBll;
+        private readonly IBookCategoryTypesBll _bookCategoryBll;
 
-        public BookCategoryController(IBookCategoryEnumBll BookCategoryBll)
+        public BookCategoryController(IBookCategoryTypesBll BookCategoryBll)
         {
             _bookCategoryBll = BookCategoryBll;
         }
 
-        [HttpGet("values/{id}")]
+        [HttpGet("type/{id}")]
         public IActionResult Get([FromRoute]BookCategoryEnum enumValue)
         {
             BookCategoryResponseDTO response = _bookCategoryBll.Get(enumValue);
@@ -24,7 +24,7 @@ namespace Library.Api.Controllers
             return Ok(response);
         }
 
-        [HttpGet("values")]
+        [HttpGet("type")]
         public IActionResult GetAll()
         {
             var response = _bookCategoryBll.GetAll();

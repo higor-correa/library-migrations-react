@@ -1,15 +1,16 @@
 ﻿using AutoMapper;
+using Library.Bll.Author.Interfaces;
 using Library.Bll.Exceptions;
-using Library.Bll.Interfaces;
 using Library.Domain.DTO.Author;
 using Library.Domain.DTO.Book;
 using Library.Domain.Entities;
 using Library.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Library.Bll
+namespace Library.Bll.Author
 {
     public class AuthorBll : IAuthorBll
     {
@@ -20,7 +21,9 @@ namespace Library.Bll
 
         public AuthorResponseDTO Get(Guid id)
         {
-            var entity = _repository.Get(id, true) ?? throw new EntityNotFoundException($"Author ({id})");
+            var entity = _repository.Get(id)
+                .AsNoTracking()
+                .SingleOrDefault() ?? throw new EntityNotFoundException($"Author ({id})");
 
             var response = Mapper.Map<AuthorResponseDTO>(entity);
 
@@ -31,7 +34,9 @@ namespace Library.Bll
 
         public IList<AuthorResponseDTO> GetAll()
         {
-            var entities = _repository.GetAll();
+            var entities = _repository.GetAll()
+                .AsNoTracking()
+                .ToList();
 
             var response = Mapper.Map<List<AuthorResponseDTO>>(entities);
 
@@ -49,7 +54,8 @@ namespace Library.Bll
 
         public void Update(Guid id, AuthorRequestDTO request)
         {
-            var entity = _repository.Get(id) ?? throw new EntityNotFoundException($"Author ({id})");
+            var entity = _repository.Get(id)
+                .SingleOrDefault() ?? throw new EntityNotFoundException($"Author ({id})");
 
             Mapper.Map(request, entity);
 
@@ -58,7 +64,8 @@ namespace Library.Bll
 
         public void Delete(Guid id)
         {
-            var entity = _repository.Get(id) ?? throw new EntityNotFoundException($"Author ({id})");
+            var entity = _repository.Get(id)
+                .SingleOrDefault() ?? throw new EntityNotFoundException($"Author ({id})");
 
             _repository.Delete(entity);
         }

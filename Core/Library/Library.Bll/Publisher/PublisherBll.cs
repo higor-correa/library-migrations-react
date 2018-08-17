@@ -1,24 +1,28 @@
 ﻿using AutoMapper;
 using Library.Bll.Exceptions;
-using Library.Bll.Interfaces;
+using Library.Bll.Publisher.Interfaces;
 using Library.Domain.DTO.Publishier;
 using Library.Domain.Entities;
 using Library.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace Library.Bll
+namespace Library.Bll.Publisher
 {
-    public class PublishierBll : IPublishierBll
+    public class PublisherBll : IPublishierBll
     {
         private readonly IPublishierRepository _repository;
 
-        public PublishierBll(IPublishierRepository repository)
+        public PublisherBll(IPublishierRepository repository)
         { _repository = repository; }
 
         public PublishierResponseDTO Get(Guid id)
         {
-            var entity = _repository.Get(id, true) ?? throw new EntityNotFoundException($"Publishier ({id})");
+            var entity = _repository.Get(id)
+                .AsNoTracking()
+                .SingleOrDefault() ?? throw new EntityNotFoundException($"Publishier ({id})");
 
             var response = Mapper.Map<PublishierResponseDTO>(entity);
 
@@ -27,7 +31,8 @@ namespace Library.Bll
 
         public IList<PublishierResponseDTO> GetAll()
         {
-            var entities = _repository.GetAll(true);
+            var entities = _repository.GetAll()
+                .ToList();
 
             var response = Mapper.Map<List<PublishierResponseDTO>>(entities);
 
@@ -37,7 +42,7 @@ namespace Library.Bll
         public Guid Insert(PublishierRequestDTO request)
         {
             var entity = Mapper.Map<PublishierEntity>(request);
-            
+
             _repository.Insert(entity);
 
             return entity.Id;
@@ -45,7 +50,8 @@ namespace Library.Bll
 
         public void Update(Guid id, PublishierRequestDTO request)
         {
-            var entity = _repository.Get(id) ?? throw new EntityNotFoundException($"Publishier ({id})");
+            var entity = _repository.Get(id)
+                .SingleOrDefault() ?? throw new EntityNotFoundException($"Publishier ({id})");
 
             Mapper.Map(request, entity);
 
@@ -54,7 +60,8 @@ namespace Library.Bll
 
         public void Delete(Guid id)
         {
-            var entity = _repository.Get(id) ?? throw new EntityNotFoundException($"Publishier ({id})");
+            var entity = _repository.Get(id)
+                .SingleOrDefault() ?? throw new EntityNotFoundException($"Publishier ({id})");
 
             _repository.Delete(entity);
         }

@@ -1,9 +1,14 @@
 ﻿using AutoMapper;
-using Library.Bll;
+using Library.Bll.Author;
+using Library.Bll.Author.Interfaces;
 using Library.Bll.Book;
+using Library.Bll.Book.Interfaces;
 using Library.Bll.Book.Validators;
 using Library.Bll.Book.Validators.Interface;
-using Library.Bll.Interfaces;
+using Library.Bll.BookCategory.Types;
+using Library.Bll.BookCategory.Types.Interface;
+using Library.Bll.Publisher;
+using Library.Bll.Publisher.Interfaces;
 using Library.Domain.AutoMapperProfiles;
 using Library.Repository;
 using Library.Repository.Interfaces;
@@ -22,9 +27,9 @@ namespace Library.Api.Extensions
             service.AddScoped<IBookBll, BookBll>();
             service.AddScoped<IBookRepository, BookRepository>();
 
-            service.AddScoped<IBookCategoryEnumBll, BookCategoryEnumBll>();
+            service.AddScoped<IBookCategoryTypesBll, BookCategoryTypesBll>();
 
-            service.AddScoped<IPublishierBll, PublishierBll>();
+            service.AddScoped<IPublishierBll, PublisherBll>();
             service.AddScoped<IPublishierRepository, PublishierRepository>();
         }
 

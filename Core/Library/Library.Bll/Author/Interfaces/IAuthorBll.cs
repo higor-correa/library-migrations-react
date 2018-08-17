@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Library.Bll.Interfaces
+namespace Library.Bll.Author.Interfaces
 {
     public interface IAuthorBll
     {

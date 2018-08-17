@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
+using Library.Bll.Book.Interfaces;
 using Library.Bll.Book.Validators.Interface;
 using Library.Bll.Exceptions;
-using Library.Bll.Interfaces;
 using Library.Domain.DTO.Author;
 using Library.Domain.DTO.Book;
 using Library.Domain.Entities;
 using Library.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,10 @@ namespace Library.Bll.Book
 
         public BookResponseDTO Get(Guid id)
         {
-            var entity = _repository.Get(id, true) ?? throw new EntityNotFoundException($"Book ({id})");
+            var entity = _repository.Get(id)
+                .AsNoTracking()
+                .Include(x => x.BookCategories)
+                .SingleOrDefault() ?? throw new EntityNotFoundException($"Book ({id})");
 
             var response = Mapper.Map<BookResponseDTO>(entity);
 
@@ -38,7 +42,10 @@ namespace Library.Bll.Book
 
         public IList<BookResponseDTO> GetAll()
         {
-            var entities = _repository.GetAll();
+            var entities = _repository.GetAll()
+                .AsNoTracking()
+                .Include(x => x.BookCategories)
+                .ToList();
 
             var response = Mapper.Map<List<BookResponseDTO>>(entities);
 
@@ -56,7 +63,8 @@ namespace Library.Bll.Book
 
         public void Update(Guid id, BookRequestDTO request)
         {
-            var entity = _repository.Get(id) ?? throw new EntityNotFoundException($"Book ({id})");
+            var entity = _repository.Get(id)
+                .SingleOrDefault() ?? throw new EntityNotFoundException($"Book ({id})");
 
             Mapper.Map(request, entity);
 
@@ -65,22 +73,26 @@ namespace Library.Bll.Book
 
         public void Delete(Guid id)
         {
-            var entity = _repository.Get(id) ?? throw new EntityNotFoundException($"Book ({id})");
+            var entity = _repository.Get(id)
+                .SingleOrDefault() ?? throw new EntityNotFoundException($"Book ({id})");
 
             _repository.Delete(entity);
         }
 
         public void PublishBook(Guid? id, PublishBookRequestDTO publishBookRequest)
         {
-            var book = _repository.Get(id.GetValueOrDefault())
-                ?? throw new EntityNotFoundException($"Book ({id})");
+            var bookAsync = _repository.Get(id.GetValueOrDefault())
+                .SingleOrDefaultAsync();
 
-            var publisher = _publishierRepository.Get(publishBookRequest.PublishierId.GetValueOrDefault())
-                ?? throw new EntityNotFoundException($"Publishier ({publishBookRequest.PublishierId})");
+            var publisherAsync = _publishierRepository.Get(publishBookRequest.PublishierId.GetValueOrDefault())
+                .SingleOrDefaultAsync();
+
+            var book = bookAsync.Result ?? throw new EntityNotFoundException($"Book ({id})");
+            var publisher = publisherAsync.Result ?? throw new EntityNotFoundException($"Publishier ({publishBookRequest.PublishierId})");
 
             _bookPublishValidator.ValidatePublish(book, publisher);
 
-            book.Publishier = _publishierRepository.Get(publishBookRequest.PublishierId.Value);
+            book.Publishier = publisher;
 
             _repository.Update(book);
         }

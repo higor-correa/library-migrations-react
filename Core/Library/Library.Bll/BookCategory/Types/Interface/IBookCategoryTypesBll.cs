@@ -2,9 +2,9 @@
 using Library.Domain.Enums;
 using System.Collections.Generic;
 
-namespace Library.Bll.Interfaces
+namespace Library.Bll.BookCategory.Types.Interface
 {
-    public interface IBookCategoryEnumBll
+    public interface IBookCategoryTypesBll
     {
         BookCategoryResponseDTO Get(BookCategoryEnum bookCategory);
         IList<BookCategoryResponseDTO> GetAll();
