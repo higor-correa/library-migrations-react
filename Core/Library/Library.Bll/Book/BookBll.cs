@@ -35,8 +35,6 @@ namespace Library.Bll.Book
 
             var response = Mapper.Map<BookResponseDTO>(entity);
 
-            response.Authors = Mapper.Map<List<AuthorResponseDTO>>(entity.AuthorsBook.Select(x => x.Author));
-
             return response;
         }
 
