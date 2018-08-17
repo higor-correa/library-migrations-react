@@ -8,16 +8,11 @@ namespace Library.Repository.Interfaces
 {
     public interface ICrudRepository<TEntity> where TEntity : BaseEntity
     {
-        TEntity Get(Guid id, bool includeChildren);
-        TEntity Get(Guid id);
-        TEntity GetAsNoTracking(Guid id);
-        IList<TEntity> GetAll(bool includeChildren);
-        IList<TEntity> GetAll();
-        IList<TEntity> GetAllAsNoTracking();
+        IQueryable<TEntity> Get(Guid id);
+        IQueryable<TEntity> GetAll();
         void Insert(TEntity entity);
         void Update(TEntity entity);
         void Delete(TEntity entity);
         IList<PropertyEntry> GetChanges(TEntity entity);
-        IQueryable<TEntity> GetQuery();
     }
 }

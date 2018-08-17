@@ -34,43 +34,14 @@ namespace Library.Repository
             _dbContext.SaveChanges();
         }
 
-        protected virtual IQueryable<TEntity> Include(IQueryable<TEntity> query)
+        public IQueryable<TEntity> GetAll()
         {
-            return query;
+            return _dbContext.Set<TEntity>().AsQueryable();
         }
 
-        public IList<TEntity> GetAll(bool includeChildren)
+        public IQueryable<TEntity> Get(Guid id)
         {
-            return includeChildren
-               ? Include(_dbContext.Set<TEntity>().AsQueryable()).ToList()
-               : GetAll();
-        }
-
-        public IList<TEntity> GetAll()
-        {
-            return _dbContext.Set<TEntity>().ToList();
-        }
-
-        public IList<TEntity> GetAllAsNoTracking()
-        {
-            return _dbContext.Set<TEntity>().AsNoTracking().ToList();
-        }
-
-        public TEntity Get(Guid id, bool includeChildren)
-        {
-            return includeChildren
-                ? Include(_dbContext.Set<TEntity>().AsQueryable()).SingleOrDefault(e => e.Id == id)
-                : Get(id);
-        }
-
-        public TEntity Get(Guid id)
-        {
-            return _dbContext.Set<TEntity>().SingleOrDefault(e => e.Id == id);
-        }
-
-        public TEntity GetAsNoTracking(Guid id)
-        {
-            return _dbContext.Set<TEntity>().AsNoTracking().SingleOrDefault(e => e.Id == id);
+            return _dbContext.Set<TEntity>().Where(e => e.Id == id);
         }
 
         public void Delete(TEntity entity)
