@@ -31,16 +31,9 @@ namespace Library.Bll
 
         public IList<AuthorResponseDTO> GetAll()
         {
-            var entities = _repository.GetAll(true);
+            var entities = _repository.GetAll();
 
             var response = Mapper.Map<List<AuthorResponseDTO>>(entities);
-
-            foreach (var author in response)
-            {
-                author.Books = Mapper.Map<List<BookResponseDTO>>(
-                    entities.FirstOrDefault(x => x.Id == author.Id)?.
-                        BooksAuthor.Select(x => x.Book));
-            }
 
             return response;
         }
