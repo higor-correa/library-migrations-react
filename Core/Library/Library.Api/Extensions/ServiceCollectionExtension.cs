@@ -25,6 +25,7 @@ namespace Library.Api.Extensions
 
             service.AddScoped<IBookPublishValidator, BookPublishValidator>();
             service.AddScoped<IBookBll, BookBll>();
+            service.AddScoped<IPublishBookBll, PublishBookBll>();
             service.AddScoped<IBookRepository, BookRepository>();
 
             service.AddScoped<IBookCategoryTypesBll, BookCategoryTypesBll>();

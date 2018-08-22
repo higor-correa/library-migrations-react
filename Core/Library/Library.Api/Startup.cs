@@ -55,5 +55,12 @@ namespace Library.Api
 
             context.Database.Migrate();
         }
+
+        //TODO-: Livro não pode ter mais de 3 autores
+        //TODO-: Autor que não possui uma editora vinculada não pode publicar o livro
+        //TODO-: Livro ao ser publicado deve ser da editora de algum dos autores
+        //TODO: Colocar data de publicação no livro pra mexer com data no front
+        //TODO: Permitir cancelar a publicação do livro
+        //TODO: OAuth? + Usuarios
     }
 }

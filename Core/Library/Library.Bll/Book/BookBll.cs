@@ -2,7 +2,6 @@
 using Library.Bll.Book.Interfaces;
 using Library.Bll.Book.Validators.Interface;
 using Library.Bll.Exceptions;
-using Library.Domain.DTO.Author;
 using Library.Domain.DTO.Book;
 using Library.Domain.Entities;
 using Library.Repository.Interfaces;
@@ -18,12 +17,17 @@ namespace Library.Bll.Book
         private readonly IBookRepository _repository;
         private readonly IPublishierRepository _publishierRepository;
         private readonly IBookPublishValidator _bookPublishValidator;
+        private readonly IPublishBookBll _publishBookBll;
 
-        public BookBll(IBookRepository repository, IPublishierRepository publishierRepository, IBookPublishValidator bookPublishValidator)
+        public BookBll(IBookRepository repository,
+                       IPublishierRepository publishierRepository,
+                       IBookPublishValidator bookPublishValidator,
+                       IPublishBookBll publishBookBll)
         {
             _repository = repository;
             _publishierRepository = publishierRepository;
             _bookPublishValidator = bookPublishValidator;
+            _publishBookBll = publishBookBll;
         }
 
         public BookResponseDTO Get(Guid id)
@@ -80,6 +84,9 @@ namespace Library.Bll.Book
         public void PublishBook(Guid? id, PublishBookRequestDTO publishBookRequest)
         {
             var bookAsync = _repository.Get(id.GetValueOrDefault())
+                .Include(x => x.AuthorsBook)
+                .ThenInclude(x => x.Author)
+                .ThenInclude(x => x.Publishier)
                 .SingleOrDefaultAsync();
 
             var publisherAsync = _publishierRepository.Get(publishBookRequest.PublishierId.GetValueOrDefault())
@@ -88,11 +95,7 @@ namespace Library.Bll.Book
             var book = bookAsync.Result ?? throw new EntityNotFoundException($"Book ({id})");
             var publisher = publisherAsync.Result ?? throw new EntityNotFoundException($"Publishier ({publishBookRequest.PublishierId})");
 
-            _bookPublishValidator.ValidatePublish(book, publisher);
-
-            book.Publishier = publisher;
-
-            _repository.Update(book);
+            _publishBookBll.Publish(book, publisher);
         }
     }
 }
