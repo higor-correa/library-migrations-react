@@ -14,7 +14,7 @@ namespace Library.Repository.Context.Mapping
             _modelBuilder = modelBuilder;
             _builder = _modelBuilder.Entity<TEntity>();
 
-            _builder.Property(x => x.Id);
+            _builder.Property(x => x.Id).IsRequired();
             _builder.HasKey(x => x.Id);
         }
 
