@@ -1,7 +1,6 @@
 ﻿using Library.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
 
 namespace Library.Repository.Context.Mapping
 {
@@ -15,7 +14,7 @@ namespace Library.Repository.Context.Mapping
             _modelBuilder = modelBuilder;
             _builder = _modelBuilder.Entity<TEntity>();
 
-            _builder.Property(x => x.Id).HasDefaultValue(Guid.NewGuid());
+            _builder.Property(x => x.Id);
             _builder.HasKey(x => x.Id);
         }
 
