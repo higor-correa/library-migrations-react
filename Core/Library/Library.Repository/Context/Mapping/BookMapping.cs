@@ -14,6 +14,7 @@ namespace Library.Repository.Context.Mapping
             _builder.Property(x => x.Name).IsRequired().HasMaxLength(120);
             _builder.Property(x => x.PublishierId);
             _builder.Property(x => x.Code).HasMaxLength(10);
+            _builder.Property(x => x.PublishDate);
 
             _builder.HasMany(x => x.AuthorsBook)
                 .WithOne(x => x.Book)

@@ -21,7 +21,7 @@ namespace Library.Bll.Book
         {
             _bookPublishValidator.ValidatePublish(book, publisher);
 
-            book.Publishier = publisher;
+            book.Publish(publisher);
 
             _bookRepository.Update(book);
         }
