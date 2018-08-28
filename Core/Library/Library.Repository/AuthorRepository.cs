@@ -1,8 +1,8 @@
-﻿using Library.Domain.Entities;
+﻿using System;
+using System.Linq;
+using Library.Domain.Entities;
 using Library.Repository.Context;
 using Library.Repository.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace Library.Repository
 {
@@ -11,11 +11,10 @@ namespace Library.Repository
         public AuthorRepository(LibraryContext dbContext) : base(dbContext)
         { }
 
-        protected override IQueryable<AuthorEntity> Include(IQueryable<AuthorEntity> query)
+        public IQueryable<AuthorEntity> AuthorsOfBook(Guid bookId)
         {
-            return query.Include(x => x.BooksAuthor)
-                        .ThenInclude(x => x.Book)
-                        .ThenInclude(x => x.BookCategories);
+            return GetAll()
+                .Where(x => x.BooksAuthor.Any(b => b.BookId == bookId));
         }
     }
 }

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Library.Domain.DTO.Publishier;
+using System;
 using System.Collections.Generic;
-using Library.Domain.DTO.Publishier;
 
-namespace Library.Bll.Interfaces
+namespace Library.Bll.Publisher.Interfaces
 {
     public interface IPublishierBll
     {

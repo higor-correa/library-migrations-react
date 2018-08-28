@@ -1,4 +1,4 @@
-﻿namespace Library.Bll.Interfaces
+﻿namespace Library.Bll.AuthorBook.Interfaces
 {
     public interface IAuthorBookBll
     { }

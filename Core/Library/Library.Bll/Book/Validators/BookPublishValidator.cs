@@ -1,21 +1,36 @@
 ﻿using Library.Bll.Book.Validators.Interface;
+using Library.Bll.Book.Validators.Strategies;
 using Library.Bll.Exceptions;
 using Library.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Library.Bll.Book.Validators
 {
     public class BookPublishValidator : IBookPublishValidator
     {
+        private List<IBookValidationStrategy> _validationStrategies;
+
+        public BookPublishValidator()
+        {
+            _validationStrategies = new List<IBookValidationStrategy>
+            {
+                new EntitiesNotFoundStrategy(),
+                new BookAlreadyPublishedStrategy(),
+                new BookAuthorsValidationStrategy()
+            };
+        }
+
         public void ValidatePublish(BookEntity book, PublishierEntity publisher)
         {
-            if (book == null)
-                throw new BusinessException("Book must be set to publish a book");
+            var erros = new List<string>();
+            
+            foreach (var strategy in _validationStrategies)
+                erros.AddRange(strategy.Validate(book, publisher));
 
-            if (publisher == null)
-                throw new BusinessException("Publisher must be set to publish a book");
-
-            if (book.Publishier != null)
-                throw new BusinessException($"Book ({book.Id}) is already published!");
+            if (erros.Any())
+                throw new BusinessException(string.Join(Environment.NewLine, erros));
         }
     }
 }

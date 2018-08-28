@@ -1,13 +1,13 @@
-﻿using Library.Bll.Extensions;
-using Library.Bll.Interfaces;
+﻿using Library.Bll.BookCategory.Types.Interface;
+using Library.Bll.Extensions;
 using Library.Domain.DTO.BookCategory;
 using Library.Domain.Enums;
 using System;
 using System.Collections.Generic;
 
-namespace Library.Bll
+namespace Library.Bll.BookCategory.Types
 {
-    public class BookCategoryEnumBll : IBookCategoryEnumBll
+    public class BookCategoryTypesBll : IBookCategoryTypesBll
     {
         public BookCategoryResponseDTO Get(BookCategoryEnum bookCategory)
         {

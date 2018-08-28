@@ -1,4 +1,4 @@
-﻿using Library.Bll.Interfaces;
+﻿using Library.Bll.Author.Interfaces;
 using Library.Domain.DTO.Author;
 using Microsoft.AspNetCore.Mvc;
 using System;
