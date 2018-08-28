@@ -97,5 +97,16 @@ namespace Library.Bll.Book
 
             _publishBookBll.Publish(book, publisher);
         }
+
+        public void UnPublish(Guid? id)
+        {
+            var book = _repository.Get(id.GetValueOrDefault())
+                .Include(x => x.Publishier)
+                .FirstOrDefault() ?? throw new EntityNotFoundException($"Book ({id})");
+
+            book.UnPublish();
+
+            _repository.Update(book);
+        }
     }
 }
