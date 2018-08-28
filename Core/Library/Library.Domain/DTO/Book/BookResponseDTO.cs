@@ -12,6 +12,7 @@ namespace Library.Domain.DTO.Book
         public string Name { get; set; }
         public string Code { get; set; }
         public Guid? PublishierId { get; set; }
+        public DateTime? PublishDate { get; set; }
 
         public PublishierResponseDTO Publishier { get; set; }
         public IList<AuthorResponseDTO> Authors { get; set; }
