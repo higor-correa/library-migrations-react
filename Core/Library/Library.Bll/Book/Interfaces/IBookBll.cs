@@ -12,6 +12,6 @@ namespace Library.Bll.Book.Interfaces
         void Update(Guid id, BookRequestDTO request);
         void Delete(Guid id);
         void PublishBook(Guid? id, PublishBookRequestDTO publishBookRequest);
-        void UnPublish(Guid? id, PublishBookRequestDTO publishBookRequest);
+        void UnPublish(Guid? id);
     }
 }

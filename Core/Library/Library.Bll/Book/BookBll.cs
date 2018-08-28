@@ -98,7 +98,7 @@ namespace Library.Bll.Book
             _publishBookBll.Publish(book, publisher);
         }
 
-        public void UnPublish(Guid? id, PublishBookRequestDTO publishBookRequest)
+        public void UnPublish(Guid? id)
         {
             var book = _repository.Get(id.GetValueOrDefault()).FirstOrDefault() 
                 ?? throw new EntityNotFoundException($"Book ({id})");

@@ -62,5 +62,13 @@ namespace Library.Api.Controllers
 
             return NoContent();
         }
+
+        [HttpPost("{id}/unpublish")]
+        public IActionResult UnPublishBook([FromRoute] Guid? id)
+        {
+            _bookBll.UnPublish(id);
+
+            return NoContent();
+        }
     }
 }
