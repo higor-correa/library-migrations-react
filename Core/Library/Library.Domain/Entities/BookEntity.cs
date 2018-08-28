@@ -19,5 +19,11 @@ namespace Library.Domain.Entities
             Publishier = publisher;
             PublishDate = DateTime.Now;
         }
+
+        public void UnPublish()
+        {
+            Publishier = null;
+            PublishDate = null;
+        }
     }
 }
