@@ -100,7 +100,9 @@ namespace Library.Bll.Book
 
         public void UnPublish(Guid? id)
         {
-            var book = _repository.Get(id.GetValueOrDefault()).FirstOrDefault() 
+            var book = _repository.Get(id.GetValueOrDefault())
+                .Include(x => x.Publishier)
+                .FirstOrDefault()
                 ?? throw new EntityNotFoundException($"Book ({id})");
 
             book.UnPublish();
