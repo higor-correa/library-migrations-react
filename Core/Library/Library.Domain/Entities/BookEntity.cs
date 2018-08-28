@@ -13,5 +13,11 @@ namespace Library.Domain.Entities
         public PublishierEntity Publishier { get; set; }
         public IList<AuthorBookEntity> AuthorsBook { get; set; }
         public IList<BookCategoryEntity> BookCategories { get; set; }
+
+        public void Publish(PublishierEntity publisher)
+        {
+            Publishier = publisher;
+            PublishDate = DateTime.Now;
+        }
     }
 }
