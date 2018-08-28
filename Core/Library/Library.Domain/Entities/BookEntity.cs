@@ -8,6 +8,7 @@ namespace Library.Domain.Entities
         public string Name { get; set; }
         public string Code { get; set; }
         public Guid? PublishierId { get; set; }
+        public DateTime? PublishDate { get; set; }
 
         public PublishierEntity Publishier { get; set; }
         public IList<AuthorBookEntity> AuthorsBook { get; set; }
