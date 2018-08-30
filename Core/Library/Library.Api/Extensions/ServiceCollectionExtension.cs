@@ -9,6 +9,8 @@ using Library.Bll.BookCategory.Types;
 using Library.Bll.BookCategory.Types.Interface;
 using Library.Bll.Publisher;
 using Library.Bll.Publisher.Interfaces;
+using Library.Bll.User;
+using Library.Bll.User.Interfaces;
 using Library.Domain.AutoMapperProfiles;
 using Library.Repository;
 using Library.Repository.Interfaces;
@@ -27,6 +29,9 @@ namespace Library.Api.Extensions
             service.AddScoped<IBookBll, BookBll>();
             service.AddScoped<IPublishBookBll, PublishBookBll>();
             service.AddScoped<IBookRepository, BookRepository>();
+
+            service.AddScoped<IUserBll, UserBll>();
+            service.AddScoped<IUserRepository, UserRepository>();
 
             service.AddScoped<IBookCategoryTypesBll, BookCategoryTypesBll>();
 
