@@ -22,6 +22,10 @@ namespace Library.Repository.Context.Mapping
                 .IsRequired()
                 .HasMaxLength(60);
 
+            _builder.Property(x => x.Active)
+                .HasDefaultValue(true)
+                .IsRequired();
+
             _builder.HasAlternateKey(x => x.Login);
         }
     }
