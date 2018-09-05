@@ -4,12 +4,9 @@ using Library.Bll.Validators.DTO.Author;
 using Library.Repository.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace Library.Api
 {
@@ -25,16 +22,11 @@ namespace Library.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-                .AddJsonOptions(opt =>
-                {
-                    opt.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-                    opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                })
-                .AddFluentValidation(opt => opt.RegisterValidatorsFromAssemblyContaining<AuthorRequestDTOValidator>());
 
-            new Bootstrapper(services, Configuration).Register();
+            services.AddMvc()
+                    .AddFluentValidation(opt => opt.RegisterValidatorsFromAssemblyContaining<AuthorRequestDTOValidator>());
+
+            new Bootstrapper(services, Configuration).Register();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +43,9 @@ namespace Library.Api
 
             app.UseHttpsRedirection();
             app.UseMiddleware(typeof(ExceptionHandler));
+
+            app.UseAuthentication();
+
             app.UseMvc();
 
             context.Database.Migrate();
@@ -59,8 +54,8 @@ namespace Library.Api
         //TODO-: Livro não pode ter mais de 3 autores
         //TODO-: Autor que não possui uma editora vinculada não pode publicar o livro
         //TODO-: Livro ao ser publicado deve ser da editora de algum dos autores
-        //TODO: Colocar data de publicação no livro pra mexer com data no front
-        //TODO: Permitir cancelar a publicação do livro
+        //TODO-: Colocar data de publicação no livro pra mexer com data no front
+        //TODO-: Permitir cancelar a publicação do livro
         //TODO: OAuth? + Usuarios
     }
 }

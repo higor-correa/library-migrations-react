@@ -4,7 +4,7 @@ namespace Library.Bll.Exceptions
 {
     public class BusinessException : Exception
     {
-        public BusinessException() : base("Operação inválida!")
+        public BusinessException() : base("Invalid operation!")
         { }
 
         public BusinessException(string message) : base(message)
