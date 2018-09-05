@@ -6,8 +6,7 @@ using System;
 namespace Library.Api.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    public class BookController : ControllerBase
+    public class BookController : ApiController
     {
         private readonly IBookBll _bookBll;
 

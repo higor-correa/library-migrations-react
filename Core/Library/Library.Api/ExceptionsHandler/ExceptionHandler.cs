@@ -37,6 +37,7 @@ namespace Library.Api.ExceptionsHandler
 
             if (exception is EntityNotFoundException) code = HttpStatusCode.NotFound;
             else if (exception is BusinessException) code = HttpStatusCode.BadRequest;
+            else if (exception is UnauthorizedException) code = HttpStatusCode.Unauthorized;
 
             if (code == HttpStatusCode.InternalServerError)
                 message = new ErrorDTO { Message = "Internal server error, contact support or try again later.", RealException = exception.Message };

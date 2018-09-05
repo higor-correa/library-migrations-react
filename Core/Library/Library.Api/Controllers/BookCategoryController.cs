@@ -6,8 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Library.Api.Controllers
 {
     [Route("api/book-category")]
-    [ApiController]
-    public class BookCategoryController : ControllerBase
+    public class BookCategoryController : ApiController
     {
         private readonly IBookCategoryTypesBll _bookCategoryBll;
 

@@ -25,6 +25,7 @@ namespace Library.Api
 
             _services.AddLibrary();
             _services.AddAutoMapper();
+            _services.AddJwtAuthentication(_configuration.GetSection("Token").GetValue<string>("PrivateKey"));
         }
     }
 }
