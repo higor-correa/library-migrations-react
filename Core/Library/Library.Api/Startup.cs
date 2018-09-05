@@ -1,5 +1,6 @@
 ﻿using FluentValidation.AspNetCore;
 using Library.Api.ExceptionsHandler;
+using Library.Bll.Settings;
 using Library.Bll.Validators.DTO.Author;
 using Library.Repository.Context;
 using Microsoft.AspNetCore.Builder;
@@ -26,7 +27,7 @@ namespace Library.Api
             services.AddMvc()
                     .AddFluentValidation(opt => opt.RegisterValidatorsFromAssemblyContaining<AuthorRequestDTOValidator>());
 
-            new Bootstrapper(services, Configuration).Register();            
+            new Bootstrapper(services, Configuration).Register();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

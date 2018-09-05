@@ -23,7 +23,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace Library.Api.Extensions
+namespace Library.Bll.Settings.Extensions
 {
     public static class ServiceCollectionExtension
     {

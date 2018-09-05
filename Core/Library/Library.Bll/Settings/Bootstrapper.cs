@@ -1,10 +1,10 @@
-﻿using Library.Api.Extensions;
+﻿using Library.Bll.Settings.Extensions;
 using Library.Repository.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Library.Api
+namespace Library.Bll.Settings
 {
     public class Bootstrapper
     {
