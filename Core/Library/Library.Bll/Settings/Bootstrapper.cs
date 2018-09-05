@@ -19,10 +19,6 @@ namespace Library.Bll.Settings
 
         public void Register()
         {
-            _services.AddDbContext<LibraryContext>(opt => opt.UseNpgsql(
-                _configuration.GetConnectionString(
-                    _configuration.GetValue<string>("Db"))));
-
             _services.AddLibrary();
             _services.AddAutoMapper();
             _services.AddJwtAuthentication(_configuration.GetSection("Token").GetValue<string>("PrivateKey"));
