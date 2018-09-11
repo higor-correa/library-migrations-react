@@ -10,6 +10,9 @@ namespace Library.Bll.Book.Validators.Strategies
         {
             var erros = new List<string>();
 
+            if (book == null)
+                return erros;
+
             if (book.Publishier != null)
                 erros.Add($"Book ({book.Id}) is already published!");
 

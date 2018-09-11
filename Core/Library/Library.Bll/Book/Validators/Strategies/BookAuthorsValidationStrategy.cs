@@ -18,6 +18,9 @@ namespace Library.Bll.Book.Validators.Strategies
 
         public IList<string> Validate(BookEntity book, PublishierEntity publisher)
         {
+            if (book == null || publisher == null)
+                return _erros;
+
             if (book.AuthorsBook.Count > 3)
                 _erros.Add($"Book can't have more than 3 authors!");
 
