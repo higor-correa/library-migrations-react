@@ -8,6 +8,10 @@ namespace Library.Domain.AutoMapperProfiles
     {
         public UserProfile()
         {
+            CreateMap<UserRequestDTO, UserEntity>()
+                .ForMember(x => x.Password, opt =>
+                    opt.Condition(dto => !string.IsNullOrWhiteSpace(dto.Password)));
+
             CreateMap<UserEntity, UserResponseDTO>();
 
             CreateMap<UserResponseDTO, UserEntity>()
