@@ -53,7 +53,7 @@ namespace Library.Bll.Test.Builder
             return this;
         }
 
-        public AuthorBuilder WithPublishier(PublishierEntity publishier)
+        public AuthorBuilder WithPublisher(PublishierEntity publishier)
         {
             _publishier = publishier;
             return this;
