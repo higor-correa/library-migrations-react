@@ -1,6 +1,4 @@
 ﻿using Library.Bll.Settings.Extensions;
-using Library.Repository.Context;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,6 +17,7 @@ namespace Library.Bll.Settings
 
         public void Register()
         {
+            _services.ConfigureDb(_configuration);
             _services.AddLibrary();
             _services.AddAutoMapper();
             _services.AddJwtAuthentication(_configuration.GetSection("Token").GetValue<string>("PrivateKey"));

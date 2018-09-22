@@ -27,10 +27,6 @@ namespace Library.Api
             services.AddMvc()
                     .AddFluentValidation(opt => opt.RegisterValidatorsFromAssemblyContaining<AuthorRequestDTOValidator>());
 
-            services.AddDbContext<LibraryContext>(opt => opt.UseNpgsql(
-                Configuration.GetConnectionString(
-                    Configuration.GetValue<string>("Db"))));
-
             new Bootstrapper(services, Configuration).Register();
         }
 
