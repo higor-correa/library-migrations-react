@@ -1,10 +1,8 @@
-﻿using Library.Api.Extensions;
-using Library.Repository.Context;
-using Microsoft.EntityFrameworkCore;
+﻿using Library.Bll.Settings.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Library.Api
+namespace Library.Bll.Settings
 {
     public class Bootstrapper
     {
@@ -19,10 +17,7 @@ namespace Library.Api
 
         public void Register()
         {
-            _services.AddDbContext<LibraryContext>(opt => opt.UseNpgsql(
-                _configuration.GetConnectionString(
-                    _configuration.GetValue<string>("Db"))));
-
+            _services.ConfigureDb(_configuration);
             _services.AddLibrary();
             _services.AddAutoMapper();
             _services.AddJwtAuthentication(_configuration.GetSection("Token").GetValue<string>("PrivateKey"));

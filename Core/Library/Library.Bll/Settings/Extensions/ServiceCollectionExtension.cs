@@ -9,7 +9,6 @@ using Library.Bll.BookCategory.Types;
 using Library.Bll.BookCategory.Types.Interface;
 using Library.Bll.Publisher;
 using Library.Bll.Publisher.Interfaces;
-using Library.Bll.Settings;
 using Library.Bll.Settings.Interfaces;
 using Library.Bll.User;
 using Library.Bll.User.Interfaces;
@@ -17,13 +16,16 @@ using Library.Bll.User.Token;
 using Library.Bll.User.Token.Interfaces;
 using Library.Domain.AutoMapperProfiles;
 using Library.Repository;
+using Library.Repository.Context;
 using Library.Repository.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace Library.Api.Extensions
+namespace Library.Bll.Settings.Extensions
 {
     public static class ServiceCollectionExtension
     {
@@ -90,6 +92,13 @@ namespace Library.Api.Extensions
                     policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme‌​)
                           .RequireAuthenticatedUser().Build());
             });
+        }
+
+        public static void ConfigureDb(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddDbContext<LibraryContext>(opt => opt.UseNpgsql(
+                configuration.GetConnectionString(
+                    configuration.GetValue<string>("Db"))));
         }
     }
 }

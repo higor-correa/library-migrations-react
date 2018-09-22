@@ -12,5 +12,10 @@ namespace Library.Domain.Entities
 
         public PublishierEntity Publishier { get; set; }
         public IList<AuthorBookEntity> BooksAuthor { get; set; }
+
+        public AuthorEntity()
+        {
+            BooksAuthor = new List<AuthorBookEntity>();
+        }
     }
 }

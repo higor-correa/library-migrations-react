@@ -1,5 +1,6 @@
 ﻿using FluentValidation.AspNetCore;
 using Library.Api.ExceptionsHandler;
+using Library.Bll.Settings;
 using Library.Bll.Validators.DTO.Author;
 using Library.Repository.Context;
 using Microsoft.AspNetCore.Builder;
@@ -26,7 +27,7 @@ namespace Library.Api
             services.AddMvc()
                     .AddFluentValidation(opt => opt.RegisterValidatorsFromAssemblyContaining<AuthorRequestDTOValidator>());
 
-            new Bootstrapper(services, Configuration).Register();            
+            new Bootstrapper(services, Configuration).Register();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,12 +51,5 @@ namespace Library.Api
 
             context.Database.Migrate();
         }
-
-        //TODO-: Livro não pode ter mais de 3 autores
-        //TODO-: Autor que não possui uma editora vinculada não pode publicar o livro
-        //TODO-: Livro ao ser publicado deve ser da editora de algum dos autores
-        //TODO-: Colocar data de publicação no livro pra mexer com data no front
-        //TODO-: Permitir cancelar a publicação do livro
-        //TODO: OAuth? + Usuarios
     }
 }
