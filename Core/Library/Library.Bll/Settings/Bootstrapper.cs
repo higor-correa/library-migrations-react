@@ -20,7 +20,7 @@ namespace Library.Bll.Settings
             _services.ConfigureDb(_configuration);
             _services.AddLibrary();
             _services.AddAutoMapper();
-            _services.AddJwtAuthentication(_configuration.GetSection("Token").GetValue<string>("PrivateKey"));
+            //_services.AddJwtAuthentication(_configuration.GetSection("Token").GetValue<string>("PrivateKey"));
         }
     }
 }

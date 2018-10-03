@@ -27,6 +27,13 @@ namespace Library.Api
             services.AddMvc()
                     .AddFluentValidation(opt => opt.RegisterValidatorsFromAssemblyContaining<AuthorRequestDTOValidator>());
 
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             new Bootstrapper(services, Configuration).Register();
         }
 
@@ -41,11 +48,11 @@ namespace Library.Api
             {
                 app.UseHsts();
             }
-
+            app.UseCors("MyPolicy");
             app.UseHttpsRedirection();
             app.UseMiddleware(typeof(ExceptionHandler));
 
-            app.UseAuthentication();
+            //app.UseAuthentication();
 
             app.UseMvc();
 
