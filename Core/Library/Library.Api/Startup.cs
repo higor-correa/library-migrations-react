@@ -49,7 +49,6 @@ namespace Library.Api
                 app.UseHsts();
             }
             app.UseCors("MyPolicy");
-            app.UseHttpsRedirection();
             app.UseMiddleware(typeof(ExceptionHandler));
 
             //app.UseAuthentication();
