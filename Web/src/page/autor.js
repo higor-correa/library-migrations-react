@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import AutorService from '../services/autor';
+import React, { PureComponent } from 'react';
+import AutorService from '../services/autor.service';
 
 
-class Autor extends Component {
+class Autor extends PureComponent {
+
     constructor() {
         super();
         this.state = {
             autores: []
         };
     };
+
     componentDidMount() {
         let service = new AutorService();
         service.getAutores(autores => this.setState({ ...this.state, autores: autores }));
