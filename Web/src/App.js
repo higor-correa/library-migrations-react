@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from './header/header.component'
-import Main from './main/main.component'
+import Header from './page/header'
+import Main from './page/main'
 import './App.css';
 
 const App = () => (

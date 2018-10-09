@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import AutorService from '../services/autor';
+
 
 class Autor extends Component {
     constructor() {
@@ -9,12 +11,8 @@ class Autor extends Component {
         };
     };
     componentDidMount() {
-        axios.get("https://localhost:5001/api/Author/")
-            .then(response => {
-                return response.data;
-            }).then(data => {
-                this.setState({ ...this.state, autores: data });
-            });
+        let service = new AutorService();
+        service.getAutores(autores => this.setState({ ...this.state, autores: autores }));
     }
 
     render() {
