@@ -7,9 +7,9 @@ a, a:hover, a:visited, a:active, .sub-menu-item {
 }
 
 .menu .material-icons {
-    font-size: 12px;
+    font-size: 15px;
     color: rgb(246, 246, 246);
-    top: 2px;
+    top: 3px;
     position: relative;
     cursor: pointer;
     padding-right: 5px;
@@ -25,12 +25,16 @@ a, a:hover, a:visited, a:active, .sub-menu-item {
     padding-left: 20px;
 }
 
-.menu li {
+.menu>li, .menu ul>li {
     list-style-type: none;
-    line-height: 12px;
+    line-height: 15px;
     background-color: rgba(54, 66, 80, 1);
     margin-bottom: 2px;
     padding: 19px 0 19px 5px;
+}
+
+.menu ul>li {
+    padding: 10px 0 10px 0px;
 }
 
 .menu {

@@ -55,11 +55,11 @@ class Menu extends Component {
             let icon = <Icon>{menu.active ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}</Icon>;
             return (
                 <li key={key} >
-                    {icon}
                     <span
                         className="sub-menu-item"
                         href="#"
                         onClick={() => this.menuClicked(menu)}>
+                        {icon}
                         {menu.menuDescription}
                     </span>
 
