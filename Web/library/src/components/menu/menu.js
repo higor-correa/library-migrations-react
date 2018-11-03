@@ -1,7 +1,7 @@
-// import { List, ListItem, ListItemText } from "@material-ui/core";
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import routes from "../../routes";
+import Icon from '@material-ui/core/Icon';
 import "./menu.css";
 
 class Menu extends Component {
@@ -32,15 +32,16 @@ class Menu extends Component {
     }
 
     renderMenuLink(menu, key) {
-
+        let icon = menu.icon ? <Icon>{menu.icon}</Icon> : ''
         return (
             <li key={key}>
-                <NavLink 
+                <NavLink
                     exact
                     to={menu.path}
                     className="menu-item"
                     activeClassName="menu-active"
                     key={menu.key}>
+                    {icon}
                     {menu.menuDescription}
                 </NavLink>
             </li>
@@ -51,9 +52,12 @@ class Menu extends Component {
         if (menu.path)
             return this.renderMenuLink(menu, key)
         else {
+            let icon = <Icon>{menu.active ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}</Icon>;
             return (
                 <li key={key} >
+                    {icon}
                     <span
+                        className="sub-menu-item"
                         href="#"
                         onClick={() => this.menuClicked(menu)}>
                         {menu.menuDescription}

@@ -1,11 +1,24 @@
-a, a:hover, a:visited, a:active {
+a, a:hover, a:visited, a:active, .sub-menu-item {
     text-decoration: none;
-    color: black;
+    color: rgb(246, 246, 246);
+    cursor: pointer;
+    font-size: 12px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.menu .material-icons {
+    font-size: 12px;
+    color: rgb(246, 246, 246);
+    top: 2px;
+    position: relative;
+    cursor: pointer;
+    padding-right: 5px;
 }
 
 .menu {
-    padding: 10px 10px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
+    height: 100vh;
 }
 
 .sub-menu {
@@ -14,16 +27,16 @@ a, a:hover, a:visited, a:active {
 
 .menu li {
     list-style-type: none;
+    line-height: 12px;
+    background-color: rgba(54, 66, 80, 1);
+    margin-bottom: 2px;
+    padding: 19px 0 19px 5px;
 }
 
 .menu {
-    background-color: rgb(52, 55, 59);
+    background-color: rgb(44, 54, 66);
 }
 
-.menu .menu-active {
-    color: rgb(168, 4, 4)
-}
-
-.menu span {
-    cursor: pointer;
+.menu .menu-active, .menu .menu-active .material-icons {
+    color: rgb(209, 52, 52);
 }

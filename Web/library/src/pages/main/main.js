@@ -17,11 +17,11 @@ const route = (
 class Main extends Component {
     render() {
         return (
-            <Grid container spacing={0}>
-                <Grid item md={2}>
-                    <Menu />
+            <Grid container spacing={0} className="container">
+                <Grid item xs={12} md={2} className="side-bar">
+                        <Menu />
                 </Grid>
-                <Grid item md={8}>
+                <Grid item xs={12} md={10} className="content">
                     {route}
                 </Grid>
             </Grid >
